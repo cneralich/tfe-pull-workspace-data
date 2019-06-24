@@ -39,4 +39,4 @@ def get_workspace_data(hostname, organization, USER_TOKEN):
             print "WORKSPACE NAME: %s\nSTATUS: NO RUNS OR STATE\n" % (workspace_name)
 
 # To call the above, you just need to pass the required values.  For example:
-# create_roles("app.terraform.io", "my-tfe-organization", "xxxxxxxx.atlasv1.xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx")
+# get_workspace_data("app.terraform.io", "my-tfe-organization", "xxxxxxxx.atlasv1.xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx")
