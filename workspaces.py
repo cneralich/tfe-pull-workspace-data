@@ -37,7 +37,6 @@ def get_workspace_data(hostname, organization, TOKEN):
             print "WORKSPACE NAME: %s\nSTATUS: %s\nTIMESTAMPS: %s\nSTATE CREATED AT: %s\nSTATE DOWNLOAD: %s\nSTATE VERSION: %s\nVCS COMMIT: %s\nVCS SHA: %s\n" % (workspace_name, status, status_timestamps, state_created_at, download_url, version, vcs_commit_url, vcs_commit_sha)
         except:
             print "WORKSPACE NAME: %s\nSTATUS: NO RUNS OR STATE\n" % (workspace_name)
-
-            
+       
 # To call the above, you just need to pass the required values.  For example:
 # get_workspace_data("app.terraform.io", "my-tfe-organization", "xxxxxxxx.atlasv1.xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx")
