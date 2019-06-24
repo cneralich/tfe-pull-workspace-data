@@ -1,8 +1,8 @@
-def get_workspace_data(hostname, organization, TOKEN):
+def get_workspace_data(hostname, organization, USER_TOKEN):
     import requests
     import json
 
-    headers = {"Authorization": "Bearer %s" % (TOKEN)}
+    headers = {"Authorization": "Bearer %s" % (USER_TOKEN)}
 
     workspaces_url = "https://%s/api/v2/organizations/%s/workspaces" % (hostname, organization)
     get_workspaces = requests.get(url=workspaces_url, headers=headers)
@@ -37,6 +37,6 @@ def get_workspace_data(hostname, organization, TOKEN):
             print "WORKSPACE NAME: %s\nSTATUS: %s\nTIMESTAMPS: %s\nSTATE CREATED AT: %s\nSTATE DOWNLOAD: %s\nSTATE VERSION: %s\nVCS COMMIT: %s\nVCS SHA: %s\n" % (workspace_name, status, status_timestamps, state_created_at, download_url, version, vcs_commit_url, vcs_commit_sha)
         except:
             print "WORKSPACE NAME: %s\nSTATUS: NO RUNS OR STATE\n" % (workspace_name)
-       
+
 # To call the above, you just need to pass the required values.  For example:
-# get_workspace_data("app.terraform.io", "my-tfe-organization", "xxxxxxxx.atlasv1.xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx")
+# create_roles("app.terraform.io", "my-tfe-organization", "xxxxxxxx.atlasv1.xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx")
