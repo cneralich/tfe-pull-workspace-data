@@ -2,7 +2,6 @@ def get_workspace_data(hostname, organization, TOKEN):
     import requests
     import json
 
-
     headers = {"Authorization": "Bearer %s" % (TOKEN)}
 
     workspaces_url = "https://%s/api/v2/organizations/%s/workspaces" % (hostname, organization)
