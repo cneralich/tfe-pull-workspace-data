@@ -12,8 +12,8 @@ def get_workspace_data(hostname, organization, TOKEN):
     for workspace in workspaces:
         try:
             # Pull Workspace Data
-            ws_id = workspace.get("id")
-            name = workspace.get("attributes").get("name")
+            workspace_id = workspace.get("id")
+            workspace_name = workspace.get("attributes").get("name")
             latest_run = workspace.get("relationships").get("latest-run").get("data").get("id")
             current_state = workspace.get("relationships").get("current-state-version").get("data").get("id")
 
@@ -25,7 +25,7 @@ def get_workspace_data(hostname, organization, TOKEN):
             status_timestamps = format_runs_data.get("data").get("attributes").get("status-timestamps")
 
             # Pull State Data
-            states_url = "https://app.terraform.io/api/v2/workspaces/%s/current-state-version" % (ws_id)
+            states_url = "https://app.terraform.io/api/v2/workspaces/%s/current-state-version" % (workspace_id)
             get_states = requests.get(url=states_url, headers=headers)
             format_states_data = json.loads(get_states.content)
             state_created_at = format_states_data.get("data").get("attributes").get("created-at")
@@ -34,6 +34,10 @@ def get_workspace_data(hostname, organization, TOKEN):
             vcs_commit_url = format_states_data.get("data").get("attributes").get("vcs-commit-url")
             vcs_commit_sha = format_states_data.get("data").get("attributes").get("vcs-commit-sha")
 
-            print "WORKSPACE NAME: %s\nSTATUS: %s\nTIMESTAMPS: %s\nSTATE CREATED AT: %s\nSTATE DOWNLOAD: %s\nSTATE VERSION: %s\nVCS COMMIT: %s\nVCS SHA: %s\n" % (name, status, status_timestamps, state_created_at, download_url, version, vcs_commit_url, vcs_commit_sha)
+            print "WORKSPACE NAME: %s\nSTATUS: %s\nTIMESTAMPS: %s\nSTATE CREATED AT: %s\nSTATE DOWNLOAD: %s\nSTATE VERSION: %s\nVCS COMMIT: %s\nVCS SHA: %s\n" % (workspace_name, status, status_timestamps, state_created_at, download_url, version, vcs_commit_url, vcs_commit_sha)
         except:
-            print "WORKSPACE NAME: %s\nSTATUS: NO RUNS OR STATE\n" % (name)
+            print "WORKSPACE NAME: %s\nSTATUS: NO RUNS OR STATE\n" % (workspace_name)
+
+            
+# To call the above, you just need to pass the required values.  For example:
+# get_workspace_data("app.terraform.io", "my-tfe-organization", "xxxxxxxx.atlasv1.xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx")
