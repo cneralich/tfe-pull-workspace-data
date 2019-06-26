@@ -18,14 +18,14 @@ def get_workspace_data(hostname, organization, USER_TOKEN):
             current_state = workspace.get("relationships").get("current-state-version").get("data").get("id")
 
             # Pull Runs Data
-            runs_url = "https://app.terraform.io/api/v2/runs/%s" % (latest_run)
+            runs_url = "https://%s/api/v2/runs/%s" % (hostname, latest_run)
             get_runs = requests.get(url=runs_url, headers=headers)
             format_runs_data = json.loads(get_runs.content)
             status = format_runs_data.get("data").get("attributes").get("status")
             status_timestamps = format_runs_data.get("data").get("attributes").get("status-timestamps")
 
             # Pull State Data
-            states_url = "https://app.terraform.io/api/v2/workspaces/%s/current-state-version" % (workspace_id)
+            states_url = "https://%s/api/v2/workspaces/%s/current-state-version" % (hostname,  workspace_id)
             get_states = requests.get(url=states_url, headers=headers)
             format_states_data = json.loads(get_states.content)
             state_created_at = format_states_data.get("data").get("attributes").get("created-at")
